@@ -1,0 +1,65 @@
+//Measuring the Memory Heirarchy
+//Homework 2
+
+#include <stdlib.h>
+#include <time.h>
+#include <stdint.h>
+#include <stdio.h>
+
+uint64_t* generate_random_list(int size)
+{
+  uint64_t* list = (uint64_t*) malloc(sizeof(uint64_t) * size);
+
+  int i;
+  int bound = 255;
+  for(i = 0; i < size; i++) list[i] = rand() % bound;
+
+  return list;
+}
+
+int main(int argc, char* argv[])
+{
+  if(argc != 2)
+    {
+      printf("Required arguments: buffer_length(N). \n");
+      return -1;
+    }
+
+  //Get Arguments: size and iterations
+  int size = atoi(argv[1]);
+  int iters = 10000;
+
+  //Generate seed
+  srand(size);
+
+  //Initialize Buffers
+  uint64_t* buffer = generate_random_list(size);
+
+  //Time accesses
+  int i = 0,access = 0,total = 0;
+  uint64_t useless = 0;
+  int totalTime = 0;
+  struct timespec start, end;
+  for(i = 0; i < iters; ++i)
+    {
+      access = rand() % size;
+      clock_gettime(CLOCK_MONOTONIC, &start);
+      useless = buffer[access];
+      clock_gettime(CLOCK_MONOTONIC, &end);
+      total += useless;
+      int elapsed = 1000000000 * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+      totalTime += elapsed;
+      printf("Time: %d\n",elapsed);
+    }
+
+  if(total == 0) printf("WHAT ARE THE CHANCES?!");
+
+  //Calculate time elapsed and time per Coord, then print
+  int timePerAccess = totalTime / iters;
+  printf("\n%d\n", timePerAccess);
+
+  free(buffer);
+  buffer = NULL;
+
+  return 0;
+}
