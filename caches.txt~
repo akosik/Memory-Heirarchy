@@ -1,0 +1,40 @@
+
+
+Cache Level: 1.
+
+Line Size: 63
+Partitions: 0
+Ways of Associativity: 7
+Sets: 63
+			 Cache Size: 32768 bytes
+				     32 KB
+
+
+Cache Level: 1.
+
+Line Size: 63
+Partitions: 0
+Ways of Associativity: 7
+Sets: 63
+			 Cache Size: 32768 bytes
+				     32 KB
+
+
+Cache Level: 2.
+
+Line Size: 63
+Partitions: 0
+Ways of Associativity: 7
+Sets: 511
+			 Cache Size: 262144 bytes
+				     262 KB
+
+
+Cache Level: 3.
+
+Line Size: 63
+Partitions: 0
+Ways of Associativity: 19
+Sets: 8191
+			 Cache Size: 10485760 bytes
+				     10485 KB

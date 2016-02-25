@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdint.h>
+
+int main(int argc, char* argv[])
+{
+  uint32_t eax = 0,ebx = 0,ecx = 0,edx = 0;
+  __asm__("movl $4, %%eax\n\t"
+	  "cpuid\n\t"
+	  "movl %%eax, %0\n\t"
+	  "movl %%ebx, %1\n\t"
+	  "movl %%ecx, %2\n\t"
+	  "movl %%edx, %3\n\t"
+	  :"+r"(eax),"+r"(ebx),"+r"(ecx),"+r"(edx)
+	  :
+	  :"eax","ebx","ecx","edx"
+	  );
+
+  const uint32_t msb = 0b1000000000000000000000000;
+  const uint32_t byte1 = 0b11111111;
+  const uint32_t byte2 = 0b1111111100000000;
+  const uint32_t byte3 = 0b111111110000000000000000;
+  const uint32_t byte4 = 0b11111111000000000000000000000000;
+
+  if((eax & msb) == 0b0)
+    {
+      unsigned eaxbyte1 = 33;//ebx & byte1;
+      uint8_t eaxbyte2 = eax & byte2;
+      uint8_t eaxbyte3 = eax & byte3;
+      uint8_t eaxbyte4 = eax & byte4;
+      printf("b1: %x\nb2: %x\nb3: %x\nb4: %x\n",eaxbyte1,eaxbyte2,eaxbyte3,eaxbyte4);
+    }
+  if((ebx & msb) == 0b0)
+    {
+      unsigned ebxbyte1 = 33;//ebx & byte1;
+      uint8_t ebxbyte2 = ebx & byte2;
+      uint8_t ebxbyte3 = ebx & byte3;
+      uint8_t ebxbyte4 = ebx & byte4;
+      printf("b1: %x\nb2: %x\nb3: %x\nb4: %x\n",ebxbyte1,ebxbyte2,ebxbyte3,ebxbyte4);
+    }
+
+  if((ecx & msb) == 0b0)
+    {
+      uint8_t ecxbyte1 = ecx & byte1;
+      uint8_t ecxbyte2 = ecx & byte2;
+      uint8_t ecxbyte3 = ecx & byte3;
+      uint8_t ecxbyte4 = ecx & byte4;
+      printf("b1: %x\nb2: %x\nb3: %x\nb4: %x\n",ecxbyte1,ecxbyte2,ecxbyte3,ecxbyte4);
+    }
+
+  if((edx & msb) == 0b0)
+    {
+      uint8_t edxbyte1 = edx & byte1;
+      uint8_t edxbyte2 = edx & byte2;
+      uint8_t edxbyte3 = edx & byte3;
+      uint8_t edxbyte4 = edx & byte4;
+      printf("b1: %x\nb2: %x\nb3: %x\nb4: %x\n",edxbyte1,edxbyte2,edxbyte3,edxbyte4);
+    }
+  return 0;
+}
