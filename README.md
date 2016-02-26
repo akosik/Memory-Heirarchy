@@ -80,7 +80,8 @@ An inline asm cpuid call (see cachesizes.c) begot the following cache sizes:
 
 **L1: 32KB**
 
-**L2: 256KB**
+**L2: ~256KB**  
+**Actually: 262KB**
 
 **L3: 10485KB**
 
