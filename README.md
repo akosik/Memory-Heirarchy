@@ -76,13 +76,15 @@ it, itself fills up but in the case of the L3 cache, a constancy of latentcy is 
 between the L2 and L1 caches.
 
 ###CPUID
-Using inline asm to call cpuid and then decoding these return values gave the following values for the cache sizes:
+An inline asm cpuid call (see cachesizes.c) begot the following cache sizes:
 
 **L1: 32KB**
 
 **L2: 256KB**
 
 **L3: 10485KB**
+
+(see caches.txt for more info)
 
 L1 and L2 were spot on from my estimates and L3 was in the range I predicted.  My graph seems to be a little off in terms of the size 
 of the L3 cache, or at least does not give a definite value for the the size.  The start of the increase in latency around the size 
@@ -91,7 +93,4 @@ latency values according to where each value is in the cache.
 
 ###Times
 The latencies for each cache are more in line with the the times mentioned in the memory hierarchy lecture.  That is, the L2 cache
-has latency around 3-5ns, the L1 cache is about the same, and so is the L3 (the beginning of L3 is a little under its expected latency
-but when the likelihood of an L2 cache hit is factored in it works out quite well).  Main memory is also slightly faster than shown in the norvig article--
-60-90ns as opposed to 100ns--but right on when compared to the number in the memory hierarchy lecture.  I assume that caches have sped up since 1998, when the article was written, so I think the slide from 
-class is more accurate.
+has latency around 3-5ns, the L1 cache is about 1-2ns, and the L3 cache spans 12-40 (the beginning of L3 is a little under its expected latency but when the likelihood of an L2 cache hit is factored in it works out quite well).  Main memory is also slightly faster than shown in the norvig article--60-90ns as opposed to 100ns--but right on when compared to the number in the memory hierarchy lecture.  I assume that caches have sped up since 1998, when the article was written, so I think the slide from class is more accurate.
