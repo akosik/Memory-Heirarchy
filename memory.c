@@ -32,7 +32,7 @@ uint64_t* generate_random_list(uint64_t size)
 
   int i;
   uint64_t bound = size;
-  for(i = 0; i < size; i++) list[i] = random_at_most(bound);
+  for(i = 0; i < size; i++) list[i] = random_at_most(bound-1);
   return list;
 }
 
@@ -59,12 +59,8 @@ int main(int argc, char* argv[])
   uint64_t access = random() % size;
   uint64_t elapsed;
   struct timespec start, end;
-  FILE *f = fopen("accesses.txt","w+");
   clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-  for(;i < iters; ++i) 
-    {
-      access = buffer[access];
-    }
+  for(;i < iters; ++i) access = buffer[access];
   clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
   elapsed = 1000000000 * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
