@@ -1,5 +1,12 @@
 # Memory-Hierarchy
 ##### Alec Kosik
+##Update:
+
+![](https://github.com/akosik/Memory-Hierarchy/blob/master/testsFIXED.png "")
+
+###Notes on this graph
+The graphs following this one were produced by forking processes of memory.c.  However, the seed to the "random" list generator was given by time(NULL) so the lack of clear jumps between most of the caches and the better-than-expected performance were both due to the fact that time(NULL)returned the same value between tests and thus some values were already cached.
+
 ## Analysis
 ####Design
 My C code creates a buffer of random numbers between 0 and the size of the buffer, for a given length.  Each time a test is run
